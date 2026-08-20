@@ -282,3 +282,18 @@ Finally, summarize:
 2. components created
 3. functionality implemented
 4. anything intentionally left for later integration
+
+Prompt -3
+
+Fix ONLY the Client List page to match the provided UI inspiration.
+
+IMPORTANT:
+- Do NOT modify App.js, AppRoutes.jsx, or any routing files.
+- Do NOT modify unrelated pages, components, or anyone else's work.
+- Work only on the ClientList page and its ClientList-specific components/styles.
+- Remove the 3 dashboard-style middle sections currently appearing on the Client List page; they do NOT belong here.
+- Make the Client List page structure match the inspiration: shared application layout/sidebar/header, page title, search/filter/sort controls, client table, pagination, and the appropriate Client List content.
+- Reuse existing shared components from the project where appropriate instead of recreating them.
+- Do not create duplicate versions of existing shared components.
+- Do not change backend/API logic. Use mock/local data only if needed for the UI.
+- Keep all changes limited to the ClientList feature.
