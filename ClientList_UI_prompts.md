@@ -297,3 +297,23 @@ IMPORTANT:
 - Do not create duplicate versions of existing shared components.
 - Do not change backend/API logic. Use mock/local data only if needed for the UI.
 - Keep all changes limited to the ClientList feature.
+
+COLOR CODE - 
+
+Update ONLY the Client List page styling to follow the attached company/SCB color usage guidelines. Do not modify App.js, AppRoutes.jsx, shared layout components, routing, functionality, data, or any files outside the ClientList page and its related ClientList CSS.
+
+Use the approved company colors from the guidelines, especially:
+
+* Primary dark navy: #020B43
+* Primary blue: #0473EA
+* Dark blue: #001E8C
+* Light blue: #7BB6F5
+* Very light blue: #C3DEFA
+* Green: #38D200
+* Light green: #CDF4BF
+* White: #FFFFFF
+* Neutral grey: #D4D4D4
+
+Replace arbitrary/non-company colors in the Client List UI with these approved colors where appropriate. Keep the UI clean, professional and consistent with the company guidelines. Use blue for primary actions/buttons, navy for important headings/navigation accents, light blue/grey for backgrounds and borders, and the approved green only for appropriate positive/low-priority states.
+
+Do not redesign the page or change its structure. Only adjust colors/styling. Do not touch any unrelated files.
