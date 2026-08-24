@@ -192,4 +192,4 @@ After creating the Settings page, make ONLY the minimum required change in front
 
 ------------------
 
-Use the existing Header component from frontend/src/components/layout/Header.jsx instead of creating a new header. Reuse it exactly as the shared component and adjust the Settings page layout/styling around it so the overall UI matches the provided Settings-page design. Do not modify the existing Header component or any of its files.
+Reuse the existing shared components already used in the project for the RM/user ID button, language selector button, and notification/bell icon. Do not create duplicate versions of these components and do not modify the existing shared components; simply import and use them in the Settings page.
