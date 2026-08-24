@@ -187,3 +187,9 @@ Before finishing, verify that all imports point only to files inside the new Set
 
 
 After creating the Settings page, make ONLY the minimum required change in frontend/src/routes/AppRoutes.jsx to add a route for "/settings" that renders the <Settings /> component. Do not modify any other existing routes or logic.
+
+
+
+------------------
+
+Use the existing Header component from frontend/src/components/layout/Header.jsx instead of creating a new header. Reuse it exactly as the shared component and adjust the Settings page layout/styling around it so the overall UI matches the provided Settings-page design. Do not modify the existing Header component or any of its files.
