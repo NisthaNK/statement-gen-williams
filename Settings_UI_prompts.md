@@ -193,3 +193,47 @@ After creating the Settings page, make ONLY the minimum required change in front
 ------------------
 
 Reuse the existing shared components already used in the project for the RM/user ID button, language selector button, and notification/bell icon. Do not create duplicate versions of these components and do not modify the existing shared components; simply import and use them in the Settings page.
+
+
+------------------
+
+
+Refactor ONLY the Settings page structure you just created. Do not change the UI design or functionality.
+
+IMPORTANT ARCHITECTURE RULE:
+Every React component must have its own dedicated CSS file. Never put a component's styling into a shared/global CSS file unless it is truly page-level layout styling.
+
+Change the Settings folder to this structure:
+
+frontend/src/pages/Settings/
+├── Settings.jsx
+├── Settings.css
+└── components/
+    ├── SettingsSidebar.jsx
+    ├── SettingsSidebar.css
+    ├── ProfileSection.jsx
+    ├── ProfileSection.css
+    ├── ChangePassword.jsx
+    └── ChangePassword.css
+
+Requirements:
+1. Move all SettingsSidebar-specific styles into SettingsSidebar.css.
+2. Move all ProfileSection-specific styles into ProfileSection.css.
+3. Move all ChangePassword-specific styles into ChangePassword.css.
+4. Keep only genuine page-level/layout styles in Settings.css, such as the overall Settings page container and the layout that positions the sidebar and content cards.
+5. Update each JSX component to import its own CSS file.
+6. Do NOT use inline styles.
+7. Do NOT create a single large CSS file containing styles for all components.
+8. Do NOT modify any files outside frontend/src/pages/Settings/ except the already-created Settings route/import in AppRoutes.jsx. Do not change that route; only leave it as it is.
+9. Do not change the visual design or functionality that has already been created.
+10. Do not create duplicate components or duplicate CSS.
+
+IMPORTANT FOR ALL FUTURE WORK:
+Follow component-level styling architecture throughout this project:
+- Component.jsx → Component.css
+- Page.jsx → Page.css
+- If a page contains multiple components, each component gets its own CSS file.
+- Parent/page CSS should contain only page-level layout styles.
+- Never put a child component's styling into the parent's CSS file.
+- Never use inline styles unless explicitly requested.
+- Never create or modify global CSS for page/component-specific styling.
