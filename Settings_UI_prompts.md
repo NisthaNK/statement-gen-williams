@@ -181,3 +181,9 @@ Do not change package.json.
 Do not install dependencies.
 
 Before finishing, verify that all imports point only to files inside the new Settings folder or existing standard React functionality, and that the new Settings page can exist independently without breaking any existing page.
+
+
+-----------------
+
+
+After creating the Settings page, make ONLY the minimum required change in frontend/src/routes/AppRoutes.jsx to add a route for "/settings" that renders the <Settings /> component. Do not modify any other existing routes or logic.
