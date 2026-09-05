@@ -1,152 +1,484 @@
-Redesign ONLY the existing Profile page UI to make it look much more polished, modern, and visually balanced.
+REDESIGN ONLY THE EXISTING PROFILE PAGE UI.
 
-IMPORTANT: Do NOT redesign the page from scratch and do NOT change its functionality. Use the existing Profile page implementation, data, API integration, components, routing, and existing layout as the foundation.
+I want you to make the existing Profile page look as CLOSE AS POSSIBLE to the following exact visual design/reference:
 
-I want the final UI to be visually close to the attached/reference design in terms of:
-- spacing
-- proportions
-- card styling
-- typography hierarchy
-- light blue/white WealthCore aesthetic
-- subtle background decorations
-- overall premium banking/wealth-management appearance
+- A premium WealthCore / Standard Chartered-style wealth-management Profile page.
+- Large dark navy left sidebar.
+- White/light header.
+- Very light blue main background.
+- Large "Hello, Anjali!" greeting area.
+- Large rounded Profile Information card.
+- Two-column card layout.
+- Subtle pale-blue abstract curves/waves in the background.
+- Clean navy typography.
+- Blue accent color.
+- Minimal, professional banking-dashboard appearance.
+- No unnecessary empty space.
+- No scrolling.
 
-However, there are some IMPORTANT differences from the reference image:
+IMPORTANT:
+You cannot see my reference image, so reproduce the visual structure described below as accurately as possible.
 
-1. THIS MUST REMAIN THE PROFILE PAGE
-   - The page heading should remain "Profile".
-   - Keep the existing Profile page purpose and content.
-   - Do NOT turn it into a Settings page.
-   - Do NOT add Settings-page functionality.
+==================================================
+1. OVERALL PAGE STRUCTURE
+==================================================
 
-2. KEEP THE EXISTING SIDEBAR
-   - Keep Dashboard
-   - Keep Clients
-   - Keep Products
-   - Keep the existing Profile navigation item
-   - Profile should remain the active/highlighted navigation item.
-   - Keep Settings where it already exists in the sidebar.
-   - Do not change the navigation routes or behavior.
+The page should visually follow this structure:
 
-3. DO NOT ADD A CHANGE PHOTO OPTION
-   - Absolutely NO "Change Photo" button.
-   - NO upload-photo functionality.
-   - NO edit-photo functionality.
-   - Keep the existing avatar/initials display exactly as a non-editable profile representation.
+--------------------------------------------------
+LEFT SIDEBAR | TOP HEADER
+             |
+             | Hello, Anjali!
+             | Here's your profile information
+             |
+             | -----------------------------------------
+             | | LEFT PROFILE | PROFILE INFORMATION   |
+             | |              |                       |
+             | |    AS        | FULL NAME             |
+             | |   avatar     | Anjali Sharma         |
+             | |              | ----------------------|
+             | |  decorative  | PHONE                 |
+             | |   content    | 9900000002            |
+             | |              | ----------------------|
+             | |              | EMAIL                 |
+             | |              | ...                   |
+             | -----------------------------------------
+             |
+             | subtle background waves
+--------------------------------------------------
 
-4. KEEP THE EXISTING PROFILE DATA
-   Continue displaying the existing API-provided profile information such as:
-   - Full Name
-   - Phone
-   - Email
-   - Employee ID
-   - Designation
-   and any other fields that are already present on the Profile page.
+The Profile Information card should be the main visual focus.
 
-   Do NOT rename API fields or change backend contracts.
-   Do NOT hardcode profile data.
+==================================================
+2. SIDEBAR
+==================================================
 
-5. IMPROVE THE MAIN CONTENT AREA
-   Instead of the current page looking very empty, create a better visual hierarchy.
+KEEP THE EXISTING SIDEBAR AND ITS FUNCTIONALITY.
 
-   Keep the existing Profile Information content but present it inside a polished, large rounded card.
+It should contain the existing:
+- Standard Chartered logo
+- Dashboard
+- Clients
+- Products
+- Profile
+- Settings
 
-   The card should have:
-   - a visually distinct avatar/initials section
-   - Profile Information heading
-   - a short subtitle
-   - clean rows for each profile field
-   - subtle dividers between fields
-   - appropriate icons where they improve readability
-   - comfortable padding and spacing
-   - rounded corners
-   - very subtle shadows/borders
+Profile must remain the active/highlighted navigation item.
 
-6. ADD SUBTLE VISUAL ELEMENTS
-   The page currently has too much empty white space.
+Do NOT:
+- change routes
+- change navigation behavior
+- remove navigation items
+- redesign the application navigation logic
 
-   Add subtle decorative WealthCore-style elements such as:
-   - very light blue abstract curves/shapes
-   - soft background gradients
-   - subtle geometric/wave elements
-   - small professional accent elements
+Only improve visual spacing/styling if necessary to match the target design.
 
-   These should remain VERY subtle and should never interfere with the profile information.
+==================================================
+3. HEADER
+==================================================
 
-7. KEEP THE PAGE NON-SCROLLABLE
-   This is IMPORTANT.
+KEEP THE EXISTING HEADER/TOP BAR AND ITS FUNCTIONALITY.
 
-   The entire Profile page must fit within the viewport at normal desktop resolution.
+Maintain the existing:
+- WealthCore branding
+- Profile title
+- language selector
+- logged-in RM/user information
+- existing controls
 
-   Do NOT introduce a vertical scrollbar.
-   Do NOT make the main content internally scroll.
-   Do NOT solve the design by simply increasing the page height.
+The header should remain clean, white, and compact.
 
-   Use:
-   - appropriate fixed/minimum heights
-   - responsive spacing
-   - flex/grid layouts
-   - carefully sized cards
-   so the complete Profile page fits cleanly in the viewport.
+Do not change any functionality.
 
-8. PRESERVE EXISTING HEADER/TOP BAR
-   Keep the existing application header/top bar and its functionality.
+==================================================
+4. PROFILE PAGE HEADING
+==================================================
 
-   You may improve its spacing/alignment/visual polish if necessary, but do not change its behavior, routes, user information, language selector, etc.
+Below the header, create a strong visual introduction.
 
-9. API AND LOADING BEHAVIOR
-   Do NOT modify the Profile API call or backend.
+Use:
 
-   Preserve the current loading behavior where API-dependent values can display "-" until the data arrives, if that is already how the page works.
+"Hello, Anjali!"
 
-10. DO NOT BREAK OTHER PAGES
-   This task is ONLY for the Profile page and its directly associated styling/component files.
+with a large, bold navy heading.
 
-   Do NOT modify:
-   - Dashboard
-   - ClientList
-   - ClientOverview
-   - Products
-   - backend
-   - API contracts
-   - shared components unless absolutely necessary
+Below it:
 
-   If styling is currently in a Profile-specific CSS file, prefer modifying that file rather than creating unnecessary global styles.
+"Here's your profile information"
 
-11. RESPONSIVENESS
-   Make the page work cleanly at the existing desktop viewport size used by the application.
+with a smaller muted-blue/gray subtitle.
 
-   Avoid unnecessary horizontal or vertical scrolling.
+The heading area should have comfortable spacing but should NOT consume excessive vertical space.
 
-12. CODE QUALITY
-   - Reuse existing components where appropriate.
-   - Do not duplicate existing components.
-   - Keep the existing React structure and state/API logic intact.
-   - Make the minimum necessary code changes for the UI redesign.
-   - Do not introduce unnecessary dependencies.
+On the upper-right side of this area, add a subtle decorative WealthCore-style quote/accent similar to:
 
-VISUAL TARGET:
+"Empowering
+a more prosperous
+tomorrow"
 
-Think of the design as:
-"Existing Profile page + premium WealthCore banking dashboard styling"
+with a small blue underline/accent.
 
-rather than:
-"Replace my Profile page with a completely different page."
+This is purely decorative and must not affect functionality.
 
-The final result should feel:
+==================================================
+5. MAIN PROFILE CARD
+==================================================
+
+Create one large rounded white Profile Information card.
+
+The card should be:
+- wide
+- horizontally centered
+- moderately tall
+- rounded
+- subtly bordered/shadowed
+- visually balanced
+- NOT excessively tall
+- NOT an empty giant rectangle
+
+The card should have TWO clear columns.
+
+LEFT COLUMN:
+A visually distinct light-blue profile/identity area.
+
+RIGHT COLUMN:
+The actual Profile Information.
+
+There should be a subtle vertical divider between the two sections.
+
+==================================================
+6. LEFT PROFILE SECTION
+==================================================
+
+The left section should contain the existing initials/avatar.
+
+For example:
+
+        AS
+
+The avatar should be:
+- large
+- circular
+- centered
+- pale blue
 - clean
 - professional
-- spacious but NOT empty
-- modern
-- premium
-- consistent with the existing Dashboard/Clients/Products pages
-- clearly a Profile page
+- surrounded by a subtle border
 
-Before making changes, inspect the existing Profile page, its CSS/styles, and any components it uses. Reuse the current structure and data flow wherever possible.
+IMPORTANT:
 
-After implementing, briefly tell me:
-1. Which files were changed.
-2. What UI changes were made.
-3. Confirm that no API/backend functionality was changed.
-4. Confirm that no Change Photo functionality was added.
-5. Confirm that the Profile page remains non-scrollable.
+DO NOT ADD:
+- Change Photo button
+- Upload Photo
+- Edit Photo
+- Camera button
+- Any photo-editing functionality
+
+The avatar must remain NON-EDITABLE.
+
+Below the avatar, add subtle non-functional decorative/profile text similar in visual style to:
+
+"Building stronger
+relationships for a brighter
+financial future."
+
+This is only to improve visual balance.
+
+Do NOT add unnecessary buttons or functionality.
+
+The left section should also have subtle pale-blue wave/curve decorations near the bottom.
+
+==================================================
+7. RIGHT PROFILE INFORMATION SECTION
+==================================================
+
+At the top:
+
+Profile Information
+
+Below it:
+
+"Your personal and contact information on file"
+
+Then display the existing API-provided profile fields.
+
+The current fields should remain, including:
+
+- Full Name
+- Phone
+- Email
+- Employee ID
+- Designation
+
+Do NOT hardcode the values.
+
+Continue using the existing API/data/state logic.
+
+==================================================
+8. PROFILE ROW STRUCTURE — VERY IMPORTANT
+==================================================
+
+EVERY profile field MUST use the EXACT SAME layout structure.
+
+Use a consistent CSS Grid/Flexbox structure.
+
+Each row should look conceptually like:
+
+[ICON]    FULL NAME
+          Anjali Sharma
+
+[ICON]    PHONE
+          9900000002
+
+[ICON]    EMAIL
+          anjali.sharma@wealthfirm.com
+
+[ICON]    EMPLOYEE ID
+          RM002
+
+[ICON]    DESIGNATION
+          Relationship Manager
+
+Use:
+- consistent icon container width
+- consistent label position
+- consistent value position
+- consistent vertical alignment
+- consistent row height
+- consistent spacing
+- subtle horizontal dividers
+
+==================================================
+9. FIX THE FULL NAME ALIGNMENT
+==================================================
+
+THIS IS A SPECIFIC BUG IN THE CURRENT UI.
+
+The FULL NAME row is currently positioned/aligned differently from the other fields.
+
+Fix it properly.
+
+The Full Name row must:
+
+- have its icon aligned exactly with the other field icons
+- have "FULL NAME" aligned exactly with PHONE, EMAIL, EMPLOYEE ID, etc.
+- have "Anjali Sharma" aligned exactly with the other values
+- use the exact same CSS structure as every other profile row
+- have the same spacing and vertical alignment as every other row
+
+DO NOT fix this with:
+- random margins
+- negative margins
+- absolute positioning
+- one-off pixel offsets
+- special CSS rules only for Full Name
+
+Instead, create ONE reusable/common row layout and use it for ALL five fields.
+
+==================================================
+10. SPACING — VERY IMPORTANT
+==================================================
+
+The current page has too much empty space.
+
+Do NOT stretch the profile rows across the entire height of the card.
+
+Instead:
+
+- Keep the Profile Information heading near the top.
+- Keep the five rows grouped together.
+- Give each row comfortable but compact spacing.
+- Use subtle dividers.
+- Keep the card visually filled without making it crowded.
+
+The left avatar section and right information section should have roughly similar visual weight.
+
+The card should look intentional and professionally designed, NOT like content floating inside a huge empty box.
+
+==================================================
+11. BACKGROUND
+==================================================
+
+The main page background should be very light, preferably white/light blue.
+
+Add subtle decorative WealthCore-style abstract elements:
+
+- pale blue curved shapes
+- soft wave patterns
+- subtle geometric curves
+
+Use them mainly:
+- behind the heading area
+- near the bottom of the page
+- around the profile card
+
+They must be VERY subtle.
+
+Do not let decorations interfere with text readability.
+
+==================================================
+12. FOOTER / LOWER AREA
+==================================================
+
+Use the remaining lower portion of the viewport for subtle branding/decorative content rather than leaving a huge blank white area.
+
+A subtle bottom wave/curve can be used.
+
+If existing WealthCore/Standard Chartered branding is already present in the application, preserve/reuse it rather than creating duplicate branding components.
+
+==================================================
+13. NON-SCROLLABLE — CRITICAL
+==================================================
+
+The Profile page MUST remain completely non-scrollable at the application's normal desktop viewport.
+
+I do NOT want:
+- vertical scrollbar
+- horizontal scrollbar
+- internally scrolling card
+- page scrolling
+
+Everything should fit naturally inside the viewport.
+
+Use proper:
+- flexbox
+- grid
+- viewport-aware heights
+- controlled padding
+- controlled margins
+- card sizing
+
+Do NOT simply shrink everything to an unreadable size.
+
+==================================================
+14. RESPONSIVENESS
+==================================================
+
+Keep the page responsive enough for the existing application.
+
+However, prioritize the desktop layout currently used by this project.
+
+Do not introduce unnecessary breakpoints or complicated responsive behavior.
+
+==================================================
+15. EXISTING DATA/API MUST NOT CHANGE
+==================================================
+
+This is a UI-only redesign.
+
+DO NOT modify:
+- API endpoints
+- API calls
+- backend
+- DTOs
+- response structures
+- field names
+- data mapping
+- state management
+- routing
+
+The existing profile data must continue to come from the API.
+
+If profile data is still loading and the current implementation displays "-" for unavailable values, preserve that behavior.
+
+==================================================
+16. DO NOT AFFECT OTHER PAGES
+==================================================
+
+ONLY modify files/components/styles required for the Profile page.
+
+Do NOT modify:
+- Dashboard
+- ClientList
+- ClientOverview
+- Products
+- backend
+- other pages
+- unrelated shared components
+
+If the Profile page has its own CSS file, prefer modifying that instead of adding global CSS.
+
+Do not introduce unnecessary dependencies.
+
+==================================================
+17. DO NOT ADD CHANGE PHOTO
+==================================================
+
+This is extremely important.
+
+There must be NO:
+- Change Photo button
+- Upload Photo option
+- Edit Photo option
+- Camera icon/button
+- photo picker
+- photo upload functionality
+
+The "AS" avatar/initials should simply be displayed.
+
+==================================================
+18. CODE QUALITY
+==================================================
+
+Before making changes:
+
+1. Inspect the existing Profile JSX/component.
+2. Inspect its CSS/style files.
+3. Inspect how the existing profile data is loaded.
+4. Preserve the existing data/API logic.
+5. Refactor only the UI/layout/CSS necessary.
+
+Use clean reusable structures.
+
+In particular, create/use a consistent profile-row structure for:
+- Full Name
+- Phone
+- Email
+- Employee ID
+- Designation
+
+Do not create separate positioning logic for individual rows.
+
+==================================================
+FINAL VISUAL TARGET
+==================================================
+
+The final Profile page should feel as close as possible to this visual concept:
+
+A premium banking dashboard with:
+
+DARK NAVY SIDEBAR
+        +
+CLEAN WHITE HEADER
+        +
+LARGE "HELLO, ANJALI!" HEADING
+        +
+SUBTLE BLUE ABSTRACT BACKGROUND
+        +
+LARGE ROUNDED WHITE PROFILE CARD
+        +
+LEFT: LARGE "AS" AVATAR + DECORATIVE PROFILE AREA
+        +
+RIGHT: PROFILE INFORMATION + FIVE CLEAN DATA ROWS
+        +
+SUBTLE DIVIDERS + ICONS
+        +
+SUBTLE BOTTOM BRANDING/WAVES
+
+It should look polished, balanced, modern and professional.
+
+MOST IMPORTANT:
+Do not merely rearrange the existing elements.
+
+Actually refine the visual hierarchy, spacing, proportions, card design, typography, icons, background decoration and alignment so the result closely resembles the target design described above.
+
+After implementation, tell me:
+
+1. Which files you modified.
+2. How you redesigned the Profile card.
+3. How you fixed the Full Name alignment.
+4. Confirm all profile fields now use the same row layout.
+5. Confirm NO Change Photo functionality was added.
+6. Confirm the page is non-scrollable.
+7. Confirm no API/backend logic was changed.
+8. Confirm no other pages were modified.
