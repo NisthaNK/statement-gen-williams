@@ -1,396 +1,263 @@
-STOP AND REDESIGN THE TASK PAGE UI PROPERLY.
+I need a focused refinement of the existing FRONTEND TASK PAGE ONLY.
 
-The current Task page implementation is NOT acceptable visually or from a usability perspective. The table is overflowing/cut off on the right side, the page does not resemble the intended reference design, and the overall layout feels unfinished.
-
-I CANNOT PROVIDE YOU THE REFERENCE IMAGE DIRECTLY, so use the following detailed description as the visual specification.
+Do NOT redesign the whole page again. Keep the current Task page UI/layout that you just implemented, but make the following functional and UI corrections.
 
 IMPORTANT SCOPE:
-- Work ONLY on the frontend Task page.
-- Do NOT modify backend code.
-- The existing Task backend controller/API already exists and is working.
-- Use the existing Task API/service and its real response data.
-- Do NOT change DTOs, controllers, services, repositories, database code, or API contracts.
-- Do NOT modify Dashboard, ClientList, ClientOverview, Products, Profile, Settings, or any other page.
-- Do NOT redesign the whole application.
-- Do NOT modify unrelated shared components.
-- Reuse the existing application's sidebar/header/layout where appropriate.
-- If a shared component must be changed for the Task page, first determine whether it can be avoided. Prefer Task-page-specific styling instead.
-- Do not create mock data when real Task API data is available.
-
-FIRST:
-Inspect the current Task page implementation and compare it against:
-1. The existing application's UI patterns.
-2. The existing Task API response structure.
-3. The visual specification below.
-
-Then REWORK the Task page UI rather than making small cosmetic changes.
+- Work ONLY on the frontend Task page and the minimum Task-related frontend files required.
+- Do NOT modify Dashboard, Clients/ClientList, ClientOverview, Products, Profile, Settings, or any other page.
+- Do NOT modify backend code unless absolutely unavoidable.
+- The existing Task backend API/controller/service already exists and must continue to be used.
+- Do not change the backend API contract.
+- Do not introduce mock task data.
 
 ==================================================
-VISUAL TARGET
+1. DEFAULT TASK ORDER — OVERDUE ABOVE PENDING
 ==================================================
 
-The Task page should look like a polished professional wealth-management/banking application.
+By default, tasks must NOT appear randomly/mixed between overdue and pending.
 
-The overall structure should be:
+The default appearance/order should ALWAYS prioritize overdue tasks above pending tasks.
 
-LEFT:
-Existing application's dark navy sidebar/navigation.
+Expected default ordering:
 
-MAIN CONTENT:
-A clean white/light background with a properly contained Task page.
+1. OVERDUE tasks first
+2. PENDING tasks after overdue tasks
+3. Other statuses after those, using sensible existing ordering
 
-TOP OF MAIN CONTENT:
-A header area containing:
+Within the same status group, preserve a sensible order such as due date / existing API order.
 
-Tasks
-All tasks across all clients
+IMPORTANT:
+- This should be the DEFAULT table ordering when the user first opens the Tasks page.
+- It should also remain logically consistent after refresh.
+- Do NOT permanently change the backend ordering.
+- Implement the ordering in the frontend unless the existing backend already provides the required ordering.
+- Do NOT treat "overdue" merely as a visual badge. It must participate in the default sorting/order.
 
-The title should have strong visual hierarchy.
+If the existing API represents overdue using a status field, use that actual status.
 
-Below the title:
-A toolbar containing:
-
-[ Search tasks/client... ]       [ Filter ▼ ] [ Sort ▼ ] [ Refresh ]
-
-The toolbar should be properly aligned on ONE horizontal row on normal desktop widths.
-
-Do not allow these controls to overlap or wrap awkwardly.
+If overdue is derived from due date + status, inspect the existing application logic and use the correct existing business rules. Do not invent conflicting rules.
 
 ==================================================
-TABLE
+2. PRIORITY MUST BE DECIDED THE SAME WAY AS CLIENTS PAGE
 ==================================================
 
-Below the toolbar, create a clean professional table inside a bordered/card-like container.
+This is VERY IMPORTANT.
 
-The table must fit properly inside the available main-content width.
+The Task page currently displays HIGH / MEDIUM / LOW priority, but the priority must be determined using the SAME logic/business rule already used by the Clients page.
 
-VERY IMPORTANT:
-The table MUST NOT extend beyond the viewport.
+Inspect the existing Clients page and its related frontend/backend logic to understand exactly how a client/task's priority is determined.
 
-Do NOT simply allow the page to become horizontally broken because of excessive fixed column widths.
+Do NOT create a new independent priority calculation.
 
-Use:
-- flexible column widths
-- appropriate min/max widths
-- text wrapping where appropriate
-- ellipsis for unusually long text if necessary
-- a responsive table container
+Reuse the existing priority logic wherever possible.
 
-The table should have exactly these columns:
-
-1. Priority
-2. Task
-3. Client Name
-4. Client ID
-5. Due Date
-6. Status
-7. Created On
-
-DO NOT INCLUDE:
-- Assigned To
-- Action
-- View
-- View button
-
-There must be NO Action/View column at all.
-
-==================================================
-COLUMN DESIGN
-==================================================
-
-Priority:
-Use compact professional badges:
+The resulting Task priority should follow the same meaning/order:
 
 HIGH
 MEDIUM
 LOW
 
-The badges should be small, rounded and visually subtle, similar to a modern banking dashboard.
+For example, if the Clients page determines priority based on certain client/task conditions, use that exact existing rule rather than assigning arbitrary priorities.
 
-Task:
-Display the actual task name from the API.
+Do not hard-code all tasks to LOW/HIGH/etc.
 
-Client Name:
-Display the actual client name from the API.
+Do not use random/mock priority values.
 
-Client ID:
-Display the actual client ID.
+If the existing Clients implementation calls a service/helper/function to determine priority, reuse that function or the same logic rather than duplicating a different implementation.
 
-Due Date:
-Display the date in a clean readable format.
-
-If overdue, visually indicate that it is overdue.
-If there is an existing reliable way to calculate "Due in X days", show that underneath the date in a smaller subtle style.
-
-Do not invent incorrect business logic.
-
-Status:
-Use compact status badges based on the ACTUAL backend status values.
-
-For example, if the API returns:
-- PENDING
-- IN PROGRESS
-- COMPLETED
-- OVERDUE
-
-display them as clean status badges.
-
-Do not invent statuses that don't exist in the API.
-
-Created On:
-Display the actual creation date from the backend in a readable format.
+IMPORTANT:
+Do not modify the Clients page while doing this.
+Only reuse/consume the existing logic from the Task page.
 
 ==================================================
-REFERENCE STYLE
+3. ADD "MARK AS COMPLETED" ACTION
 ==================================================
 
-The intended visual style is similar to a professional Task management table:
+Add an action/button alongside each task that allows the user to change the task status to COMPLETED.
 
-- Dark navy application sidebar
-- White main content
-- Large "Tasks" heading
-- Smaller subtitle "All tasks across all clients"
-- Search field with search icon
-- Filter button
-- Sort button
-- Refresh icon/button
-- Rounded but professional controls
-- Light borders
-- Subtle shadows
-- Good whitespace
-- Clean table header
-- Compact rows
-- Clear column alignment
-- Small priority/status pills
-- Blue used as the primary interactive/accent color
-- Professional banking/wealth-management appearance
+The current table intentionally does NOT have the old "View" or "Action" column.
 
-Do NOT make it look like a generic HTML table.
+Do NOT bring back the old View column.
 
-==================================================
-SPACING AND SIZING
-==================================================
+Instead, add a compact action associated with each task row, such as:
 
-This is VERY IMPORTANT.
+[Complete]
 
-The current implementation looks cramped and overflows.
+or an appropriate small checkmark/button.
 
-Fix the layout so:
+The action should be visually consistent with the existing WealthCore UI.
 
-- The Task title has sufficient top/left spacing.
-- The subtitle sits directly below the title.
-- The toolbar has proper spacing from the title and table.
-- The table has comfortable row height.
-- Table headers align exactly with their columns.
-- Cell contents do not collide.
-- The table stays inside the main content area.
-- There is enough padding around the table.
-- The sidebar does not overlap the main content.
-- The content area uses the available desktop width correctly.
-- Avoid unnecessary vertical scrolling.
-- Do not create unnecessary horizontal scrolling.
+When the user clicks it:
 
-The page should feel balanced, not like the table is being squeezed into a narrow area.
+1. Confirm that the task is being marked as completed if confirmation is appropriate for the existing application style.
+2. Call the EXISTING backend API/service method for updating/completing a task IF such an endpoint already exists.
+3. Do NOT invent a new endpoint.
+4. Do NOT modify the backend just because the UI needs this.
+5. After successful completion, update the task's status in the UI immediately.
+6. The completed task should no longer appear under the overdue/pending group.
+7. The table ordering should update automatically after completion.
+8. Show an appropriate success/error state.
+
+If the existing backend DOES NOT currently provide a way to update task status:
+
+DO NOT modify the backend automatically.
+
+Instead, inspect the existing TaskController/service and tell me exactly what is missing and why a backend change would be required. Do not implement a fake frontend-only completion that gives the impression that the server data was updated.
 
 ==================================================
-PAGINATION
+4. COMPLETED TASKS
 ==================================================
 
-At the bottom of the table/card, create a clean pagination section.
+Completed tasks should display a clear COMPLETED status badge.
 
-Left side:
+They should not be treated as overdue even if their due date is in the past.
 
-Showing X to Y of Z tasks
+Priority/status logic must distinguish:
 
-Right side:
+COMPLETED
+OVERDUE
+PENDING
+etc.
 
-Previous   1   2   3   4   5   ...   Next
-
-Keep pagination compact.
-
-DO NOT allow 20+ page buttons to stretch across the entire screen like the current implementation.
-
-Use ellipsis when there are many pages.
-
-The active page should have the application's primary blue styling.
-
-Pagination must actually work with the existing Task data/API.
-
-If the backend already supports pagination, use it.
-
-If the backend returns all tasks, implement frontend pagination without modifying the backend.
+Do not mark a completed task as overdue merely because its due date has passed.
 
 ==================================================
-SEARCH
+5. THE PAGE MUST NOT SCROLL
 ==================================================
 
-Search should work against the actual Task data.
+The Tasks page itself must NOT become a vertically or horizontally scrollable page under normal desktop resolution.
 
-At minimum, search by:
-- task name
-- client name
-- client ID
+This is a strict requirement.
 
-If the existing backend provides search functionality, use it.
+The current page should fit within the application's available viewport.
 
-Otherwise, perform client-side filtering.
+Do NOT solve this by making the entire page horizontally scrollable.
 
-Do not modify the backend merely to add search.
+Do NOT solve it by making the entire page vertically scrollable.
 
-==================================================
-FILTER
-==================================================
+Instead fix the layout properly.
 
-Create a professional Filter dropdown/popover.
+The table should fit inside the available content area.
 
-Use actual fields available from the Task API.
+Use:
+- appropriate column widths
+- compact but readable row heights
+- proper padding
+- responsive sizing
+- sensible pagination
+- ellipsis/wrapping where necessary
 
-At minimum, if available:
-- Priority
-- Status
+The sidebar and header must remain in their existing positions.
 
-The filter should actually affect the displayed tasks.
+The main Task content should fit cleanly within the viewport.
 
-Do not modify the backend just for frontend filtering.
-
-==================================================
-SORT
-==================================================
-
-Create a professional Sort dropdown.
-
-Useful options can include:
-- Due Date
-- Created On
-- Priority
-
-Use the actual Task data.
-
-The sort should actually work.
+If the number of tasks exceeds what can be displayed at once, use the existing pagination rather than allowing the entire page to grow indefinitely.
 
 ==================================================
-REFRESH
+6. PAGINATION
 ==================================================
 
-The refresh button should call the existing Task API/service again and update the table.
+Keep pagination at the bottom of the Task table/card.
 
-Do not reload the entire browser.
+Do not display a huge number of page buttons.
 
-==================================================
-LOADING STATE
-==================================================
+Use a compact pattern such as:
 
-While the Task API is loading:
+Previous  1  2  3  ...  19  Next
 
-Do NOT show a broken empty table.
+The pagination must remain within the viewport.
 
-Use a clean loading state consistent with the existing application's UI.
-
-It can be a centered "Loading tasks..." state or a polished skeleton if the project already has a suitable pattern.
+Filtering, searching, sorting and status changes should work correctly with pagination.
 
 ==================================================
-ERROR STATE
+7. SEARCH / FILTER / SORT
 ==================================================
 
-If the API fails:
+Keep the existing search, filter, sort and refresh functionality.
 
-Show a clean error message inside the Task page.
+Make sure the new default overdue-first ordering does NOT break the user's explicit Sort selection.
 
-Provide a retry/refresh option.
+Meaning:
 
-Do not break the sidebar or rest of the application.
+DEFAULT:
+Overdue → Pending → other statuses
 
-==================================================
-MOST IMPORTANT UI FIX
-==================================================
+But if the user explicitly selects a sort option such as Due Date or Created On, respect that explicit selection.
 
-The current screenshot shows the table being cut off on the right.
+Do not silently override a user-selected sort.
 
-FIX THIS COMPLETELY.
-
-The Task page must be usable at normal desktop resolution.
-
-The table must be contained within the main content area.
-
-Do NOT solve this by simply shrinking the font to an unreadable size.
-
-Instead use proper:
-- layout
-- flex/grid sizing
-- table layout
-- column widths
-- padding
-- overflow handling
-- responsive behavior
-
-The table should look intentional and polished.
+After changing a task to COMPLETED, recalculate the displayed ordering appropriately.
 
 ==================================================
-CONSISTENCY WITH EXISTING APPLICATION
+8. IMPORTANT — DO NOT BREAK EXISTING UI
 ==================================================
 
-Do NOT copy the reference application's branding/sidebar literally.
+Keep the Task page's current visual style that was just implemented.
 
-Our existing application already has:
-- Standard Chartered branding
-- WealthCore
-- Dashboard
-- Clients
-- Products
-- Tasks
-- Profile/Settings
+Only improve/refine the required areas:
 
-Keep the existing application's navigation and branding.
+- default overdue-first ordering
+- priority calculation
+- task completion action
+- no page scrolling
+- correct pagination behavior
 
-Tasks should simply become the active navigation item.
-
-The Task page content should visually belong to the same application as the existing Dashboard, ClientList, ClientOverview, Products and Profile pages.
-
-Reuse existing design tokens/styles/components where appropriate.
-
-==================================================
-DATA / BACKEND
-==================================================
-
-Use the existing Task backend exactly as it currently exists.
-
-Inspect the existing TaskController and taskService/API response only to understand the data.
-
-DO NOT modify backend code.
-
-Correctly map the existing backend response fields into:
-
-Priority
-Task
-Client Name
-Client ID
-Due Date
-Status
-Created On
-
-If field names differ, map them in the frontend.
-
-Do not change the API contract.
+Do not unnecessarily change:
+- sidebar
+- header
+- branding
+- colors
+- overall table design
+- search layout
+- existing navigation
+- other pages
 
 ==================================================
-FILE SAFETY
+9. BEFORE CODING
 ==================================================
 
-Before modifying files, identify exactly which frontend files are required.
+First inspect:
 
-Do not make broad changes.
+- existing Task page
+- Task API/service
+- TaskController only for understanding the available API
+- Clients page
+- Clients-related priority logic/service/helper
 
-After implementation, report:
+Determine:
+A. How overdue is represented/determined.
+B. How priority is determined in Clients.
+C. Whether an existing task status update/complete API exists.
 
-1. Which files were changed.
-2. Which files were NOT changed.
-3. Confirm whether any backend file was modified.
-4. Confirm the exact Task API endpoint/service function being used.
-5. Confirm that Assigned To and Action/View columns were removed.
-6. Confirm that search/filter/sort/pagination/refresh work.
-7. Confirm that the table no longer overflows the main content area.
+Then implement the frontend changes using the existing architecture.
 
-If you discover that a backend change is absolutely necessary, DO NOT make it automatically. Stop and explain why it is unavoidable and wait for approval.
+==================================================
+10. AFTER IMPLEMENTATION
+==================================================
 
-The priority is:
-FUNCTIONAL EXISTING API + POLISHED TASK UI + ZERO IMPACT ON OTHER PAGES.
+Before finishing, verify:
+
+- [ ] Overdue tasks appear above pending tasks by default.
+- [ ] Completed tasks are not treated as overdue.
+- [ ] Task priority uses the same logic as the Clients page.
+- [ ] HIGH / MEDIUM / LOW display correctly.
+- [ ] Each non-completed task has a way to mark it COMPLETED.
+- [ ] The completion action uses the existing API if available.
+- [ ] No fake frontend-only completion is implemented if no backend update API exists.
+- [ ] Search still works.
+- [ ] Filter still works.
+- [ ] Sort still works.
+- [ ] Refresh still works.
+- [ ] Pagination still works.
+- [ ] Explicit user-selected sorting is respected.
+- [ ] The page does NOT vertically scroll.
+- [ ] The page does NOT horizontally scroll at normal desktop resolution.
+- [ ] No other page has been modified.
+- [ ] No backend code has been modified.
+
+At the end, clearly tell me:
+1. Which files you changed.
+2. Whether any backend file was changed.
+3. Which existing Clients priority logic you reused.
+4. Which existing API/service is being used to mark tasks completed.
+5. If no status-update API exists, explain exactly what is missing instead of changing the backend.
